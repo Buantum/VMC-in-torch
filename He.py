@@ -20,10 +20,8 @@ class TrialWaveFunction(nn.Module):
         计算波函数的对数
         r1, r2: [batch_size, 3]
         """
-        r1_norm = torch.norm(r1, dim=1)  # [batch_size]
-        r2_norm = torch.norm(r2, dim=1)  # [batch_size]
         r12 = torch.norm(r1 - r2, dim=1)  # [batch_size]
-        log_slater = -1.79*(r1_norm + r2_norm)
+        log_slater = -1.79*(r1 + r2)
         log_jastrow = -self.alpha/(0.1 + self.beta*r12)
         return log_slater + log_jastrow
 
